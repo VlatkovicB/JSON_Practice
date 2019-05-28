@@ -5,27 +5,31 @@ import com.bojan.homework.model.Fixture;
 import com.bojan.homework.model.Supply;
 import com.bojan.homework.model.Totality;
 import com.bojan.homework.service.JsonBuilder;
-import com.google.gson.Gson;
 
+/**
+ * Totality kao jedna celina, koja ima Supply sa svojim Fixturima. Jos cu sutra
+ * preslusati detaljnije, da vidim da li nesto nedostaje. Verovatno bi moglo
+ * bolje da se napravi, da pravi u posebnom folderu (da bude unique folder) za
+ * svaki supply koji se doda.
+ * 
+ * @author Bojan
+ *
+ */
 public class App {
 	public static void main(String[] args) {
-		Gson gson = new Gson();
 
 		Supply supply = new Supply(2, "name", null, "address", "hexserial",
 				"description");
-
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		for (int i = 0; i < 5; i++) {
 			fixtures.add(new Fixture(i, "Name: " + i, null, "Address: " + i,
 					"Serial" + i, "Desc: " + i));
 		}
 
-		String json = gson.toJson(supply);
-
-		System.out.println(json);
+		Totality totality = new Totality(supply, fixtures,
+				"deviceRelationsName");
 
 		JsonBuilder jb = JsonBuilder.getInstance();
-
-		jb.writeJsonString(new Totality(supply, fixtures, "deviceRelationsName"));
+		jb.writeJsonString(totality);
 	}
 }
