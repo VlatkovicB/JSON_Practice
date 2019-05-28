@@ -55,6 +55,7 @@ public class JsonBuilder {
 	private void writeJsonToFile(String json, File file) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			writer.write(json);
+			writer.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
