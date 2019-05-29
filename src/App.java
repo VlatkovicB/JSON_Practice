@@ -31,9 +31,9 @@ public class App {
 
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
-				fixtures.add(new Fixture(Integer.parseInt(j + "" + i), "Name: "
-						+ i + j, null, supply, "Serial" + i + j, "Desc: " + i
-						+ j));
+				fixtures.add(new Fixture((int) (Math.random() * 100), "Name: "
+						+ i + j, null, supply, "Serial"
+						+ (int) (Math.random() * 100), "Desc: " + i + j));
 			}
 			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
 			totalities.add(totality);
