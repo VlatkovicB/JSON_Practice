@@ -20,9 +20,14 @@ public class App {
 		Totality totality = null;
 		ArrayList<Totality> totalities = new ArrayList<Totality>();
 
+		/**
+		 * Randomly building Totality of 5 supplies with 5 fixtures each.
+		 */
 		for (int j = 0; j < 5; j++) {
-			Supply supply = new Supply(j, "supplyName" + j, null,
-					"supplyAddress" + j, "supplyHexserial", "supplyDescription");
+			int variable = (int) (Math.random() * 100);
+			Supply supply = new Supply(variable, "supplyName" + variable, null,
+					"supplyAddress" + variable, "supplyHexserial",
+					"supplyDescription");
 
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
@@ -34,8 +39,8 @@ public class App {
 			totalities.add(totality);
 		}
 
-		Totality[] totalitiesArray = (Totality[]) totalities
-				.toArray(new Totality[totalities.size()]);
+		Totality[] totalitiesArray = totalities.toArray(new Totality[totalities
+				.size()]);
 
 		JsonBuilder jb = JsonBuilder.getInstance();
 		jb.setTotality(totalitiesArray);
