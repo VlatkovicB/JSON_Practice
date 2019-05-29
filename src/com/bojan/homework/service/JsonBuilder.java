@@ -55,10 +55,8 @@ public class JsonBuilder {
 	}
 
 	private void writeJsonToFile(String json, File file) {
-		try (BufferedWriter writer = new BufferedWriter(
-				new FileWriter(file/*
-									 * , true
-									 */))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,
+				true))) {
 			writer.write(json);
 			writer.flush();
 		} catch (IOException e) {
@@ -87,7 +85,6 @@ public class JsonBuilder {
 			tree = objectMapper.readTree(json);
 			formattedJson = objectMapper.writeValueAsString(tree);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
