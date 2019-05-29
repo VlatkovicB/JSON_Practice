@@ -1,7 +1,9 @@
 package com.bojan.homework.service;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -14,24 +16,11 @@ import com.google.gson.Gson;
 public class JsonBuilder {
 
 	public static JsonBuilder jsonBuilder = null;
-	private File supplyFile = new File("supplies-scan.json");
-	private File fixturesFile = new File("fixtures-scan.json");
-	private File deviceRelationsFile = new File("devicerelations.json");
+	private File supplyFile = new File("files/supplies-scan.json");
+	private File fixturesFile = new File("files/fixtures-scan.json");
+	private File deviceRelationsFile = new File("files/devicerelations.json");
 
 	private JsonBuilder() {
-		try {
-			if (!supplyFile.exists()) {
-				supplyFile.createNewFile();
-			}
-			if (!fixturesFile.exists()) {
-				fixturesFile.createNewFile();
-			}
-			if (deviceRelationsFile.exists()) {
-				deviceRelationsFile.createNewFile();
-			}
-		} catch (IOException e) {
-		}
-
 	}
 
 	public static JsonBuilder getInstance() {
@@ -41,7 +30,7 @@ public class JsonBuilder {
 		return jsonBuilder;
 	}
 
-	private void writeJsonString(Totality totality) {
+	private void writeJsonString(Totality totality) throws IOException {
 		Gson gson = new Gson();
 
 		String supplyJson = gson.toJson(totality.getSupply());
@@ -54,27 +43,56 @@ public class JsonBuilder {
 
 	}
 
-	private void writeJsonToFile(String json, File file) {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file,
-				true))) {
+	private void writeJsonToFile(String json, File file) throws IOException {
+
+		BufferedWriter writer = null;
+		if (!file.exists()) {
+			file.createNewFile();
+
+			writer = new BufferedWriter(new FileWriter(file));
+
+			System.out.println("in doesnt exist" + json);
 			writer.write(json);
 			writer.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
+
+		} else {
+			BufferedReader reader = new BufferedReader(new FileReader(file));
+			StringBuilder fileData = new StringBuilder();
+			String line = null;
+
+			while ((line = reader.readLine()) != null) {
+				fileData.append(line);
+			}
+			fileData.substring(0, fileData.length() - 2);
+			fileData.append(json).append("]");
+
+			writer = new BufferedWriter(new FileWriter(file));
+
+			writer.write(fileData.toString());
+			writer.flush();
+
+			reader.close();
+
 		}
+		writer.close();
 	}
 
 	public void setTotality(Totality... totalities) {
 		if (totalities.length == 0) {
 			System.out.println("No totalities provided");
 		}
-		for (Totality totality : totalities) {
-			writeJsonString(totality);
+
+		try {
+			for (Totality totality : totalities) {
+				writeJsonString(totality);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 	}
 
-	public String formatJson(String json) {
+	private String formatJson(String json) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 

@@ -21,19 +21,19 @@ public class App {
 		ArrayList<Totality> totalities = new ArrayList<Totality>();
 
 		for (int j = 0; j < 5; j++) {
-			Supply supply = new Supply(2, "supplyName" + j, null,
+			Supply supply = new Supply(j, "supplyName" + j, null,
 					"supplyAddress" + j, "supplyHexserial", "supplyDescription");
 
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
-				fixtures.add(new Fixture(Integer.parseInt(i + "" + j), "Name: "
+				fixtures.add(new Fixture(Integer.parseInt(j + "" + i), "Name: "
 						+ i + j, null, supply, "Serial" + i + j, "Desc: " + i
 						+ j));
 			}
 			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
 			totalities.add(totality);
 		}
-		System.out.println(totalities);
+
 		Totality[] totalitiesArray = (Totality[]) totalities
 				.toArray(new Totality[totalities.size()]);
 
