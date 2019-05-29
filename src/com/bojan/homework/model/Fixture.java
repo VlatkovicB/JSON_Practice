@@ -42,8 +42,8 @@ public class Fixture {
 		return address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress(Supply supply) {
+		this.address = supply.getAddress();
 	}
 
 	public String getSerial() {
@@ -63,12 +63,12 @@ public class Fixture {
 	}
 
 	public Fixture(int status, String name, List<Property> properties,
-			String address, String serial, String statusDescription) {
+			Supply supply, String serial, String statusDescription) {
 		super();
 		this.status = status;
 		this.name = name;
 		this.properties = properties;
-		this.address = address;
+		this.address = supply.getAddress();
 		this.serial = serial;
 		this.statusDescription = statusDescription;
 	}

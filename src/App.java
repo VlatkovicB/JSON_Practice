@@ -18,12 +18,12 @@ import com.bojan.homework.service.JsonBuilder;
 public class App {
 	public static void main(String[] args) {
 
-		Supply supply = new Supply(2, "name", null, "address", "hexserial",
-				"description");
+		Supply supply = new Supply(2, "supplyName", null, "supplyAddress",
+				"supplyHexserial", "supplyDescription");
 		List<Fixture> fixtures = new ArrayList<Fixture>();
 		for (int i = 0; i < 5; i++) {
-			fixtures.add(new Fixture(i, "Name: " + i, null, "Address: " + i,
-					"Serial" + i, "Desc: " + i));
+			fixtures.add(new Fixture(i, "Name: " + i, null, supply, "Serial"
+					+ i, "Desc: " + i));
 		}
 
 		Totality totality = new Totality(supply, fixtures,
