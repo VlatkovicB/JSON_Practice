@@ -1,7 +1,10 @@
+import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import com.bojan.homework.model.Fixture;
+import com.bojan.homework.model.Property;
 import com.bojan.homework.model.Supply;
 import com.bojan.homework.model.Totality;
 import com.bojan.homework.service.JsonBuilder;
@@ -24,16 +27,17 @@ public class App {
 		 * Randomly building Totality of 5 supplies with 5 fixtures each.
 		 */
 		for (int j = 0; j < 5; j++) {
+
 			int variable = (int) (Math.random() * 100);
-			Supply supply = new Supply(variable, "supplyName" + variable, null,
-					"supplyAddress" + variable, "supplyHexserial",
-					"supplyDescription");
+			Supply supply = new Supply(variable, "supplyName" + variable,
+					new ArrayList<Property>(), "supplyAddress" + variable,
+					"supplyHexserial", "supplyDescription");
 
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
 				fixtures.add(new Fixture((int) (Math.random() * 100), "Name: "
-						+ i + j, null, supply, "Serial"
-						+ (int) (Math.random() * 100), "Desc: " + i + j));
+						+ i + j, new ArrayList<Property>(), supply, UUID
+						.randomUUID().toString(), "Desc: " + i + j));
 			}
 			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
 			totalities.add(totality);
