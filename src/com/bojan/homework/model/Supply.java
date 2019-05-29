@@ -11,9 +11,19 @@ public class Supply {
 	private String statusDescription;
 
 	public Supply() {
-		
+
 	}
-	
+
+	public Supply(int status, String name, List<Property> properties,
+			String address, String serial, String statusDescription) {
+		this.status = status;
+		this.name = name;
+		this.properties = properties;
+		this.address = address;
+		this.serial = serial;
+		this.statusDescription = statusDescription;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -62,14 +72,10 @@ public class Supply {
 		this.statusDescription = statusDescription;
 	}
 
-	public Supply(int status, String name, List<Property> properties,
-			String address, String serial, String statusDescription) {
-		super();
-		this.status = status;
-		this.name = name;
-		this.properties = properties;
-		this.address = address;
-		this.serial = serial;
-		this.statusDescription = statusDescription;
+	@Override
+	public String toString() {
+		return "Supply [status=" + status + ", name=" + name + ", serial="
+				+ serial + "]";
 	}
+
 }

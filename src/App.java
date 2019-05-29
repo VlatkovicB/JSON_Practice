@@ -17,19 +17,27 @@ import com.bojan.homework.service.JsonBuilder;
  */
 public class App {
 	public static void main(String[] args) {
+		Totality totality = null;
+		ArrayList<Totality> totalities = new ArrayList<Totality>();
 
-		Supply supply = new Supply(2, "supplyName", null, "supplyAddress",
-				"supplyHexserial", "supplyDescription");
-		List<Fixture> fixtures = new ArrayList<Fixture>();
-		for (int i = 0; i < 5; i++) {
-			fixtures.add(new Fixture(i, "Name: " + i, null, supply, "Serial"
-					+ i, "Desc: " + i));
+		for (int j = 0; j < 5; j++) {
+			Supply supply = new Supply(2, "supplyName" + j, null,
+					"supplyAddress" + j, "supplyHexserial", "supplyDescription");
+
+			List<Fixture> fixtures = new ArrayList<Fixture>();
+			for (int i = 0; i < 5; i++) {
+				fixtures.add(new Fixture(Integer.parseInt(i + "" + j), "Name: "
+						+ i + j, null, supply, "Serial" + i + j, "Desc: " + i
+						+ j));
+			}
+			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
+			totalities.add(totality);
 		}
-
-		Totality totality = new Totality(supply, fixtures,
-				"deviceRelationsName");
+		System.out.println(totalities);
+		Totality[] totalitiesArray = (Totality[]) totalities
+				.toArray(new Totality[totalities.size()]);
 
 		JsonBuilder jb = JsonBuilder.getInstance();
-		jb.writeJsonString(totality);
+		jb.setTotality(totalitiesArray);
 	}
 }

@@ -14,6 +14,16 @@ public class Fixture {
 
 	}
 
+	public Fixture(int status, String name, List<Property> properties,
+			Supply supply, String serial, String statusDescription) {
+		this.status = status;
+		this.name = name;
+		this.properties = properties;
+		this.address = supply.getAddress();
+		this.serial = serial;
+		this.statusDescription = statusDescription;
+	}
+
 	public int getStatus() {
 		return status;
 	}
@@ -62,14 +72,8 @@ public class Fixture {
 		this.statusDescription = statusDescription;
 	}
 
-	public Fixture(int status, String name, List<Property> properties,
-			Supply supply, String serial, String statusDescription) {
-		super();
-		this.status = status;
-		this.name = name;
-		this.properties = properties;
-		this.address = supply.getAddress();
-		this.serial = serial;
-		this.statusDescription = statusDescription;
+	@Override
+	public String toString() {
+		return "Fixture [status=" + status + ", name=" + name + "]";
 	}
 }

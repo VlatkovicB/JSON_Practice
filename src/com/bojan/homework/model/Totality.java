@@ -39,4 +39,9 @@ public class Totality {
 		this.deviceRelations = deviceRelations;
 	}
 
+	@Override
+	public String toString() {
+		return "Totality [supply=" + supply + ", fixtures=" + fixtures + "]";
+	}
+
 }

@@ -8,6 +8,20 @@ public class DeviceRelations {
 	private String ipAddress;
 	private String name;
 
+	public DeviceRelations(List<Fixture> fixtures, Supply supply,
+			String deviceRelationsName) {
+		List<String> fixturesSerials = new ArrayList<String>();
+
+		for (Fixture fixture : fixtures) {
+			fixturesSerials.add(fixture.getSerial());
+		}
+		this.fixtures = fixturesSerials;
+
+		this.ipAddress = supply.getAddress();
+
+		this.name = deviceRelationsName;
+	}
+
 	public List<String> getFixtures() {
 		return fixtures;
 	}
@@ -39,17 +53,4 @@ public class DeviceRelations {
 		this.name = name;
 	}
 
-	public DeviceRelations(List<Fixture> fixtures, Supply supply,
-			String deviceRelationsName) {
-		List<String> fixturesSerials = new ArrayList<String>();
-
-		for (Fixture fixture : fixtures) {
-			fixturesSerials.add(fixture.getSerial());
-		}
-		this.fixtures = fixturesSerials;
-
-		this.ipAddress = supply.getAddress();
-
-		this.name = deviceRelationsName;
-	}
 }
