@@ -1,4 +1,3 @@
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -29,22 +28,19 @@ public class App {
 		for (int j = 0; j < 5; j++) {
 
 			int variable = (int) (Math.random() * 100);
-			Supply supply = new Supply(variable, "supplyName" + variable,
-					new ArrayList<Property>(), "supplyAddress" + variable,
-					"supplyHexserial", "supplyDescription");
+			Supply supply = new Supply(variable, "supplyName" + variable, new ArrayList<Property>(),
+					"supplyAddress" + variable, "supplyDescription");
 
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
-				fixtures.add(new Fixture((int) (Math.random() * 100), "Name: "
-						+ i + j, new ArrayList<Property>(), supply, UUID
-						.randomUUID().toString(), "Desc: " + i + j));
+				fixtures.add(new Fixture((int) (Math.random() * 100), "Name: " + i + j, new ArrayList<Property>(),
+						supply, UUID.randomUUID().toString(), "Desc: " + i + j));
 			}
 			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
 			totalities.add(totality);
 		}
 
-		Totality[] totalitiesArray = totalities.toArray(new Totality[totalities
-				.size()]);
+		Totality[] totalitiesArray = totalities.toArray(new Totality[totalities.size()]);
 
 		JsonBuilder jb = JsonBuilder.getInstance();
 		jb.setTotality(totalitiesArray);

@@ -2,6 +2,8 @@ package com.bojan.homework.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Supply {
 	private int status;
 	private String name;
@@ -9,19 +11,21 @@ public class Supply {
 	private String address;
 	private String serial;
 	private String statusDescription;
+	@JsonIgnore
+	private static long counter = System.currentTimeMillis();
 
 	public Supply() {
 
 	}
 
-	public Supply(int status, String name, List<Property> properties,
-			String address, String serial, String statusDescription) {
+	public Supply(int status, String name, List<Property> properties, String address, String statusDescription) {
 		this.status = status;
 		this.name = name;
 		this.properties = properties;
 		this.address = address;
-		this.serial = serial;
+		this.serial = String.valueOf(counter);
 		this.statusDescription = statusDescription;
+		counter++;
 	}
 
 	public int getStatus() {
@@ -60,10 +64,6 @@ public class Supply {
 		return serial;
 	}
 
-	public void setSerial(String serial) {
-		this.serial = serial;
-	}
-
 	public String getStatusDescription() {
 		return statusDescription;
 	}
@@ -74,8 +74,7 @@ public class Supply {
 
 	@Override
 	public String toString() {
-		return "Supply [status=" + status + ", name=" + name + ", serial="
-				+ serial + "]";
+		return "Supply [status=" + status + ", name=" + name + ", serial=" + serial + "]";
 	}
 
 }
