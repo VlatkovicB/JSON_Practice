@@ -1,4 +1,3 @@
-import java.rmi.server.UID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -32,12 +31,11 @@ public class App {
 			Supply supply = new Supply(variable, "supplyName" + variable,
 					new ArrayList<Property>(), "supplyAddress" + variable,
 					"supplyHexserial", "supplyDescription");
-
 			List<Fixture> fixtures = new ArrayList<Fixture>();
 			for (int i = 0; i < 5; i++) {
 				fixtures.add(new Fixture((int) (Math.random() * 100), "Name: "
-						+ i + j, new ArrayList<Property>(), supply, UUID
-						.randomUUID().toString(), "Desc: " + i + j));
+						+ i + j, new ArrayList<Property>(), supply, "Desc: "
+						+ i + j));
 			}
 			totality = new Totality(supply, fixtures, "deviceRelationsName" + j);
 			totalities.add(totality);

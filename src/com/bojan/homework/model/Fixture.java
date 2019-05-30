@@ -2,6 +2,8 @@ package com.bojan.homework.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Fixture {
 	private int status;
 	private String name;
@@ -9,19 +11,22 @@ public class Fixture {
 	private String address;
 	private String serial;
 	private String statusDescription;
+	@JsonIgnore
+	private static long counter = System.currentTimeMillis();
 
 	public Fixture() {
 
 	}
 
 	public Fixture(int status, String name, List<Property> properties,
-			Supply supply, String serial, String statusDescription) {
+			Supply supply, String statusDescription) {
 		this.status = status;
 		this.name = name;
 		this.properties = properties;
 		this.address = supply.getAddress();
-		this.serial = serial;
+		this.serial = String.valueOf(counter);
 		this.statusDescription = statusDescription;
+		counter++;
 	}
 
 	public int getStatus() {
@@ -58,10 +63,6 @@ public class Fixture {
 
 	public String getSerial() {
 		return serial;
-	}
-
-	public void setSerial(String serial) {
-		this.serial = serial;
 	}
 
 	public String getStatusDescription() {
