@@ -18,7 +18,8 @@ public class Supply {
 
 	}
 
-	public Supply(int status, String name, List<Property> properties, String address, String statusDescription) {
+	public Supply(int status, String name, List<Property> properties,
+			String address, String statusDescription) {
 		this.status = status;
 		this.name = name;
 		this.properties = properties;
@@ -74,7 +75,8 @@ public class Supply {
 
 	@Override
 	public String toString() {
-		return "Supply [status=" + status + ", name=" + name + ", serial=" + serial + "]";
+		return "Supply [status=" + status + ", name=" + name + ", serial="
+				+ serial + "]";
 	}
 
 }
